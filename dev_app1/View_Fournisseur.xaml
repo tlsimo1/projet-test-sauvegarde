@@ -1,0 +1,85 @@
+﻿<Window x:Class="dev_app1.View_Fournisseur"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="View_Fournisseur" Height="350" Width="800">
+    <Border>
+        <StackPanel>
+            <DataGrid RowHeight="30"  ColumnWidth="*" FontFamily="Calibri" HorizontalContentAlignment="Stretch"  
+                      BorderBrush="Green" BorderThickness="5" HorizontalAlignment="Stretch"  
+                      CanUserDeleteRows="False" ColumnHeaderHeight="30" 
+                      CanUserResizeColumns="False" CanUserReorderColumns="False"
+                      GridLinesVisibility="Horizontal" Background="Gray"  x:Name="grid_Fournisseur" CanUserAddRows="False" 
+                      ItemsSource="{Binding Lists, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedItem="{Binding ChosenItem, UpdateSourceTrigger=PropertyChanged}"  
+                      AutoGenerateColumns="False" Height="220">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Id,Mode=TwoWay}" Header="ID" Foreground="#FFC94B4B" Visibility="Hidden"  />
+                    <DataGridTextColumn Binding="{Binding Path=Nom,Mode=TwoWay}" Header="Nom" Foreground="#FFC94B4B"  />
+                    <DataGridTextColumn Binding="{Binding Path=Email,Mode=TwoWay}" Header="Email" Foreground="#FFC94B4B"  />
+                    <DataGridTextColumn Binding="{Binding Path=Adress,Mode=TwoWay}" Header="Adress" Foreground="#FFC94B4B"  />
+                    <DataGridTextColumn Binding="{Binding Path=IFF,Mode=TwoWay}" Header="IF" Foreground="#FFC94B4B"  />
+                    <DataGridTextColumn Binding="{Binding Path=Tel,Mode=TwoWay}" Header="Tel" Foreground="#FFC94B4B"  />
+                    <DataGridTextColumn Binding="{Binding Path=Ice,Mode=TwoWay}" Header="ICE" Foreground="#FFC94B4B"  />
+                    <DataGridTextColumn Binding="{Binding Path=Pays,Mode=TwoWay}" Header="Pays" Foreground="#FFC94B4B"  />
+                    <DataGridTextColumn Binding="{Binding Path=Ville,Mode=TwoWay}" Header="Ville" Foreground="#FFC94B4B"  />
+
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Update"  Click="Button_Click_1"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Click="Button_Click_2" ></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+            <Border>
+                <StackPanel>
+                    <Grid Height="97">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="293*"/>
+                            <ColumnDefinition Width="299*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50*"/>
+                                        <RowDefinition Height="47*"/>
+                                    </Grid.RowDefinitions>
+
+                                </Grid>
+                                <TextBox  x:Name="txt_name" Height="40" Grid.Row="0" TextChanged="txt_name_TextChanged" >
+                                    <TextBox.Text>
+                                        <Binding Path="Nom" Mode="TwoWay"   ValidatesOnDataErrors="True" NotifyOnValidationError="True" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Button Grid.Column="0" Grid.Row="1" Height="50" Content="Enregistrer" Click="Button_Click" FontSize="20">
+
+                                </Button>
+                            </StackPanel>
+
+
+
+
+                        </Border>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </Border>
+</Window>

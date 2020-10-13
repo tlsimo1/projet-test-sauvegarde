@@ -1,0 +1,5 @@
+D:\dev_app1\BEL\bin\Debug\BEL.dll
+D:\dev_app1\BEL\bin\Debug\BEL.pdb
+D:\dev_app1\BEL\obj\Debug\BEL.csprojResolveAssemblyReference.cache
+D:\dev_app1\BEL\obj\Debug\BEL.dll
+D:\dev_app1\BEL\obj\Debug\BEL.pdb

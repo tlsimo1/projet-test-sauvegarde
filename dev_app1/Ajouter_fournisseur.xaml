@@ -1,0 +1,333 @@
+﻿<Window x:Class="dev_app1.Ajouter_fournisseur"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ajouter_fournisseur" Width="815" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" SizeToContent="Height">
+    <Window.Resources>
+        <!--textbox style-->
+        <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+            <GradientStop Color="#ABADB3" Offset="0.05"/>
+            <GradientStop Color="#E2E3EA" Offset="0.07"/>
+            <GradientStop Color="#E3E9EF" Offset="1"/>
+        </LinearGradientBrush>
+        <Style x:Key="abc" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="#FFEBF3EA"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+
+                <Setter.Value >
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" CornerRadius="7" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--button style-->
+        <Style x:Key="ButtonStyleNoHighlighting" TargetType="{x:Type Button}">
+            <!--<Setter Property="Background" Value=""></Setter>-->
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="270"/>
+            <Setter Property="Margin" Value=" 0,1,0,15"/>
+            <Setter Property="Background" Value="#FF8E8E8E"/>
+            <Setter Property="Content" Value=" Enregistrer"/>
+            <Setter Property="TextBlock.Text" Value="Enregistrer"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="15 15 15 15"   Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="true">
+                    <Setter Property="Background" Value="#FF06C257" />
+                </Trigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=add_nom, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=IF, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=Tel, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=Ville, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=Pays, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=ICE, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=Email, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=Adress, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+        <!--button style 2-->
+        <Style x:Key="imagebutton2" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF06C257"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value=" 0,1,0,15"/>
+            <Setter Property="Content" Value=" Enregistrer"/>
+            <Setter Property="TextBlock.Text" Value="Enregistrer"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border   Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Content="{TemplateBinding Content}" Margin="0,15,25,15" Width="0" HorizontalAlignment="Right" Height="Auto"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--button style 3-->
+        <Style x:Key="buttonannuler" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFEEF3F6"/>
+            <Setter Property="Foreground" Value="#FFF68784"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,0,15,20"/>
+            <Setter Property="Content" Value=" annuler"/>
+            <Setter Property="TextBlock.Text" Value="Enregistrer"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border   Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border >
+        <StackPanel>
+
+            <!--header-->
+            <Border CornerRadius="30,30,0,0" Background="#FF06C257"  Height="50"   >
+                <Grid Height="46" Background="#FF06C257" HorizontalAlignment="Stretch" Width="750" Margin="0,0,18,0">
+                    <Label Content="Ajouter Fournisseur" FontSize="20" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" />
+                    <Button  Style="{DynamicResource imagebutton2}" Click="Button_Click_2" Height="Auto" Margin="5,0,0,0" Width="40" >
+                        <StackPanel Margin="-17,-12,-20,-9">
+                            <Image Source="D:\dev_app1\dev_app1\Images\if_cross_646197.png" VerticalAlignment="Top" Height="30" Margin="0,7,0,0" HorizontalAlignment="Right"  Cursor="Hand" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+
+
+
+
+
+            <!--body-->
+            <Grid Height="3" Background="#FF757CA2"/>
+
+
+            <Border>
+                <Grid Background="#FFEEF3F6" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition  Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Content="information" Foreground="#FF6E73CF" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center"/>
+                    <Border Width="750" Margin="0,0,0,15" BorderBrush="#FFE4E8EC" Padding="0,0,0,20" BorderThickness="1" CornerRadius="7"  Background="White" Grid.Row="1">
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="350*"/>
+                                <ColumnDefinition Width="16*"/>
+                                <ColumnDefinition Width="350*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+                                <RowDefinition Height="16*"/>
+
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Nom" Foreground="#FF7E7777" Grid.Column="1" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <Label Content="Téléphone" Foreground="#FF7E7777" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <Label Content="Ville" Foreground="#FF7E7777" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <Label Content="Adresse" Foreground="#FF7E7777" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <Label Content="IF" Foreground="#FF7E7777" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <Label Content="Email" Foreground="#FF7E7777" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <Label Content="Pays" Foreground="#FF7E7777" Grid.Column="3" Grid.Row="4" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <Label Content="ICE" Foreground="#FF7E7777" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Left"  FontFamily="Arial" />
+                            <TextBox x:Name="add_nom" Grid.Column="1"  Grid.Row="1"  Style="{DynamicResource abc}" >
+                                <TextBox.Text>
+                                    <Binding Path="Nom" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>-->
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="tel"   Grid.Column="1" Grid.Row="3"  Style="{DynamicResource abc}" VerticalAlignment="Bottom" >
+                                <TextBox.Text>
+                                    <Binding Path="Tel" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>-->
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="ville"  Grid.Column="1" Grid.Row="5"  Style="{DynamicResource abc}">
+                                <TextBox.Text>
+                                    <Binding Path="Ville" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>-->
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="Adress" Grid.Column="1" Grid.Row="7"  Style="{DynamicResource abc}"  >
+                                <TextBox.Text>
+                                    <Binding Path="Adress" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>-->
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="IF"   Grid.Column="3" Grid.Row="1"  Style="{DynamicResource abc}">
+
+                                <TextBox.Text>
+                                    <Binding Path="IFF" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>-->
+
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="Email"  Grid.Column="3" Grid.Row="3"  Style="{DynamicResource abc}" >
+                                <TextBox.Text>
+                                    <Binding Path="Email" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>
+                                            <local:Val_Email></local:Val_Email>-->
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="Pays" Grid.Column="3" Grid.Row="5"  Style="{DynamicResource abc}" >
+                                <TextBox.Text>
+                                    <Binding Path="Pays" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>-->
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox x:Name="ICE"   Grid.Column="3" Grid.Row="7"  Style="{DynamicResource abc}">
+                                <TextBox.Text>
+                                    <Binding Path="Ice" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <!--<local:Val_Nom></local:Val_Nom>-->
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+                    </Border>
+
+
+
+
+                    <!--footer-->
+                    <Border VerticalAlignment="Bottom" Height="60" Grid.Row="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45*"/>
+                                <ColumnDefinition Width="152*"/>
+                                <ColumnDefinition Width="45*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Click="Button_Click_1"  Grid.Column="1"  Style="{DynamicResource ButtonStyleNoHighlighting}">
+                                <StackPanel Orientation="Horizontal" Cursor="Hand">
+                                    <Image Width="25" Source="D:\dev_app1\dev_app1\Images\iconevr2.png" HorizontalAlignment="Left" Margin="10,0,70,0" />
+                                    <Label Foreground="White"  Content="Enregistrer" FontSize="17" Margin="-17,0,200,0" BorderThickness="0"/>
+                                </StackPanel>
+
+                            </Button>
+                            <Button Click="Button_Click_3"  Grid.Column="0" Style="{DynamicResource buttonannuler}" >
+                                <StackPanel Orientation="Horizontal" Cursor="Hand">
+
+                                    <Label Foreground="#FFF06C6C"  Content="annuler" FontSize="20" BorderThickness="0" Margin="0,0,40,0"/>
+                                </StackPanel>
+                            </Button>
+
+
+                            <Label Foreground="#FFA6A1A1" Content="enregister et créer" Grid.Column="2" HorizontalAlignment="Center" FontSize="13" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        </Grid>
+                    </Border>
+
+
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>
